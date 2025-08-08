@@ -9,10 +9,11 @@ This project implements a **modular test structure** where each test file focuse
 ## Test Coverage
 
 ### Core Form Elements
-- **Text Inputs** (`test_text_inputs.py`)
+- **Text Inputs** (`test_text_inputs.py` / `test_text_inputs_pom.py`)
   - Standard text fields with input validation
   - Password fields with secure data handling  
   - Multi-line textarea with content verification
+  - **POM Implementation**: Demonstrates Page Object Model refactoring with side-by-side comparison
 
 - **Form Selection Controls** (`test_selection_controls.py`)
   - Independent checkbox interactions (checked and default states)
@@ -48,6 +49,22 @@ This project implements a **modular test structure** where each test file focuse
 - **Independence**: Tests can run individually or as a complete suite  
 - **Maintainability**: Changes to specific elements only affect relevant test files
 - **Scalability**: Easy to add new test categories without affecting existing tests
+
+## Page Object Model Implementation
+
+This project demonstrates **incremental POM adoption** with side-by-side comparison approach:
+
+### POM Architecture
+- **`page_objects/base_page.py`**: Common page functionality with essential methods
+- **`page_objects/locators.py`**: Centralized element locators for maintainability  
+- **`page_objects/web_form_page.py`**: Business logic methods for form interactions
+- **Shared fixture**: `web_form_page` fixture in `conftest.py` eliminates object creation repetition
+
+### Migration Benefits
+- **Side-by-side comparison**: Easy to see POM benefits vs direct WebDriver calls
+- **Gradual migration**: Shows how to introduce POM without breaking existing tests
+- **Risk mitigation**: Original tests remain as fallback during transition
+- **Educational value**: Clear before/after comparison for learning purposes
 
 ## Requirements
 
@@ -88,8 +105,11 @@ pytest
 
 ### Run Specific Test Categories
 ```bash
-# Text input tests only
+# Text input tests (direct WebDriver)
 pytest test_cases/test_text_inputs.py
+
+# Text input tests (POM version)
+pytest test_cases/test_text_inputs_pom.py
 
 # Form selection control tests only  
 pytest test_cases/test_selection_controls.py
@@ -113,14 +133,20 @@ pytest -s
 ## Project Structure
 ```
 selenium-web-form-tests/
+├── page_objects/
+│   ├── base_page.py                 # Common page functionality
+│   ├── locators.py                  # Centralized element locators
+│   └── web_form_page.py             # Form interaction methods
 ├── test_cases/
 │   ├── test_first_test.py           # Basic form submission test (original)
-│   ├── test_text_inputs.py          # Text, password, textarea
+│   ├── test_text_inputs.py          # Text, password, textarea (direct WebDriver)
+│   ├── test_text_inputs_pom.py      # Text, password, textarea (POM version)
 │   ├── test_selection_controls.py   # Checkboxes, radio buttons, dropdowns
 │   ├── test_advanced_input_types.py # Color, date, range, file inputs
 │   ├── test_field_states.py         # Disabled and readonly validation
 │   └── test_form_submission.py      # Complete end-to-end workflow
-├── conftest.py                  # Shared test fixtures
-├── requirements.txt             # Python dependencies
-└── README.md                    # Project documentation
+├── reports/                         # Test execution reports
+├── conftest.py                      # Shared test fixtures
+├── requirements.txt                 # Python dependencies
+└── README.md                        # Project documentation
 ```
