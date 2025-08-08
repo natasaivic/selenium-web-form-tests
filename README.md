@@ -15,23 +15,23 @@ This project implements a **modular test structure** where each test file focuse
   - Multi-line textarea with content verification
   - **POM Implementation**: Demonstrates Page Object Model refactoring with side-by-side comparison
 
-- **Form Selection Controls** (`test_selection_controls.py`)
+- **Form Selection Controls** (`test_selection_controls.py` / `test_selection_controls_pom.py`)
   - Independent checkbox interactions (checked and default states)
   - Mutually exclusive radio button group behavior
   - HTML `<select>` dropdowns with multiple selection methods (by text and value)
   - HTML `<datalist>` autocomplete inputs with dynamic suggestions
 
-- **Advanced Input Types** (`test_input_types.py`)
+- **Advanced Input Types** (`test_advanced_input_types.py` / `test_advanced_input_types_pom.py`)
   - Color picker with hex value validation
   - Date picker with format verification
   - Range slider with dynamic value changes
   - File upload with temporary file handling
 
-- **Field State Validation** (`test_field_states.py`)
+- **Field State Validation** (`test_field_states.py` / `test_field_states_pom.py`)
   - Disabled field interaction prevention
   - Read-only field modification restrictions
 
-- **End-to-End Testing** (`test_form_submission.py`)
+- **End-to-End Testing** (`test_form_submission.py` / `test_form_submission_pom.py`, `test_first_test.py` / `test_first_test_pom.py`)
   - Complete form workflow with all field types
   - Form submission and success message validation
 
@@ -65,6 +65,21 @@ This project demonstrates **incremental POM adoption** with side-by-side compari
 - **Gradual migration**: Shows how to introduce POM without breaking existing tests
 - **Risk mitigation**: Original tests remain as fallback during transition
 - **Educational value**: Clear before/after comparison for learning purposes
+
+### ⚠️ Professional Practice Note
+
+**This dual-version approach is for portfolio demonstration only.** In production environments:
+
+1. **Migration Phase**: Keep both versions temporarily during gradual rollout
+2. **Completion Phase**: Delete original files once POM versions are tested and validated
+3. **Final State**: Only POM versions remain, with clean naming (remove `_pom` suffix)
+
+**Current approach benefits:**
+- **Portfolio demonstration**: Shows refactoring skills and architectural thinking
+- **Learning/comparison**: Side-by-side code quality comparison
+- **Risk mitigation**: Validates POM functionality before removing originals
+
+In real projects, you would complete the migration by replacing original files with POM versions once validation is complete.
 
 ## Requirements
 
@@ -138,13 +153,18 @@ selenium-web-form-tests/
 │   ├── locators.py                  # Centralized element locators
 │   └── web_form_page.py             # Form interaction methods
 ├── test_cases/
-│   ├── test_first_test.py           # Basic form submission test (original)
-│   ├── test_text_inputs.py          # Text, password, textarea (direct WebDriver)
-│   ├── test_text_inputs_pom.py      # Text, password, textarea (POM version)
-│   ├── test_selection_controls.py   # Checkboxes, radio buttons, dropdowns
-│   ├── test_advanced_input_types.py # Color, date, range, file inputs
-│   ├── test_field_states.py         # Disabled and readonly validation
-│   └── test_form_submission.py      # Complete end-to-end workflow
+│   ├── test_first_test.py                 # Basic form submission test (original)
+│   ├── test_first_test_pom.py             # Basic form submission test (POM version)
+│   ├── test_text_inputs.py                # Text, password, textarea (direct WebDriver)
+│   ├── test_text_inputs_pom.py            # Text, password, textarea (POM version)
+│   ├── test_selection_controls.py         # Checkboxes, radio buttons, dropdowns (original)
+│   ├── test_selection_controls_pom.py     # Checkboxes, radio buttons, dropdowns (POM version)
+│   ├── test_advanced_input_types.py       # Color, date, range, file inputs (original)
+│   ├── test_advanced_input_types_pom.py   # Color, date, range, file inputs (POM version)
+│   ├── test_field_states.py               # Disabled and readonly validation (original)
+│   ├── test_field_states_pom.py           # Disabled and readonly validation (POM version)
+│   ├── test_form_submission.py            # Complete end-to-end workflow (original)
+│   └── test_form_submission_pom.py        # Complete end-to-end workflow (POM version)
 ├── reports/                         # Test execution reports
 ├── conftest.py                      # Shared test fixtures
 ├── requirements.txt                 # Python dependencies
